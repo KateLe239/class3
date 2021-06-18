@@ -7,7 +7,8 @@ import kotlinx.coroutines.runBlocking
 import java.net.InetSocketAddress
 
 fun sumsServer(hostname: String, port: Int) = runBlocking {
-    val server = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().bind(InetSocketAddress(hostname, port))
+    val server = aSocket(ActorSelectorManager(Dispatchers.IO)).
+        tcp().bind(InetSocketAddress(hostname, port))
     println("Started summation server at ${server.localAddress}")
 
     while (true) {
@@ -40,7 +41,8 @@ fun sumsServer(hostname: String, port: Int) = runBlocking {
 }
 
 fun sumsClient(hostname: String, port: Int) = runBlocking {
-    val socket = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().connect(InetSocketAddress(hostname, port))
+    val socket = aSocket(ActorSelectorManager(Dispatchers.IO)).
+        tcp().connect(InetSocketAddress(hostname, port))
     val input = socket.openReadChannel()
     val output = socket.openWriteChannel(autoFlush = true)
 
