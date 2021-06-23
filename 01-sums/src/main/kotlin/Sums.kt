@@ -23,14 +23,14 @@ fun sumsServer(hostname: String, port: Int) = runBlocking {
             try {
                 while (true) {
                     val line = input.readUTF8Line()
-
+                    val num = input.readUTF8Line()
                     println("${socket.remoteAddress}: $line")
-
                     val answer = line?.let {
                         line.split(" ").map { it.toInt() }.sum()
                     }
 
-                    output.writeStringUtf8("$answer\r\n")
+
+                    output.writeStringUtf8("$answer\r\n" + "$num ")
                 }
             } catch (e: Throwable) {
                 e.printStackTrace()
